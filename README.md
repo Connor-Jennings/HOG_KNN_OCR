@@ -1,5 +1,4 @@
-# HOG_KNN_OCR
-Optical Character Recognition
+# Optical Character Recognition
 
 
 This program employes the Histogram of Oriented Gradients and the K-nearest neighbors algorithm to ID digits 1-9.
