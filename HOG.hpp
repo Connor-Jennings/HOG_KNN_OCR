@@ -33,9 +33,4 @@ std::vector<int> normalize(const std::vector<std::vector<std::vector<int>>>&);
 
 void normalizeHistogram(std::vector<int>& );
 
-std::vector<int> hogMath2(const Mat& image);
-
-std::pair<int,int> values(const int& row, const int& col, const Mat& image);
-
-
 #endif /* HOG_hpp */
