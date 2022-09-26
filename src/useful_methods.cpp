@@ -52,3 +52,34 @@ void output(const std::vector<Answer>& results){
 
     }
 }
+
+Mat getImg(const short int& number_selected, const int& file_number, bool test){
+    auto file = fileName(number_selected, file_number, test);
+    if(file == "-1"){
+        Mat emptyMat;
+        return emptyMat;
+    }
+    // get image and resize
+    Mat img;
+    
+    img = imread(file, 0); //read in grayscale
+    /*for(int i =0; i < img.cols; ++i){
+        for(int j = 0; j < img.rows; ++j){
+            std::cout << (int)img.at<uchar>(i,j) << " ";
+        }
+        std::cout << std::endl;
+    }*/
+    if(img.empty()){
+        std::cout << "Could not read the image "  << std::endl;
+        Mat emptyMat;
+        return emptyMat;
+    }
+    return img;
+}
+
+void print_list(const std::list<digit_dist>& lst){
+    for (auto it = lst.begin(); it != lst.end(); ++it){
+        std::cout << "(" << (*it).digit << "|" << (*it).dist << ")";
+    }
+    std::cout << std::endl;
+}

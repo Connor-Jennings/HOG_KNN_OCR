@@ -10,6 +10,9 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <opencv2/opencv.hpp>
+
+using namespace cv;
 
 struct list_of_params{
     std::vector<short int> train;
@@ -19,8 +22,8 @@ struct list_of_params{
 };
 
 struct number_hog{
-    short int number;
-    std::vector<int> HOG;
+    short int digit;
+    std::vector<double> HOG;
 };
 
 std::string fileName(const short int&, const int&, bool);
@@ -51,7 +54,11 @@ void output(const std::vector<Answer>&);
 
 struct digit_dist{
     short int digit;
-    double dist;
+    long double dist = 0.0;
 };
+
+Mat getImg(const short int&, const int&, bool);
+
+void print_list(const std::list<digit_dist>&);
 
 #endif /* useful_methods_hpp */
