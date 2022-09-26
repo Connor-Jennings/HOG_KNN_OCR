@@ -1,7 +1,7 @@
 # Optical Character Recognition
 
 
-This program employes the Histogram of Oriented Gradients for feature detection and the K-nearest neighbors algorithm for classification on handwritten digits 1-9.
+This program employes the Histogram of Oriented Gradients for feature detection and the K-nearest neighbors algorithm for classification on handwritten digits 0-9.
 
 The data used for training and testing is from the MNIST dataset. Which can be found at http://yann.lecun.com/exdb/mnist/. 
 
