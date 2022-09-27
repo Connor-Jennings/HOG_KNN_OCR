@@ -9,4 +9,12 @@ Current version has been found to be 96% correct when identifying handwritten di
 
 Examples of digits classified wrong:
 
+guessed: 1, actual: 2
 ![Alt text](/images/img00004.png?raw=true "Title")
+
+guessed: 7, actual: 2
+![Alt text](/images/img00010.png?raw=true "Title")
+
+guessed: 8, actual: 9
+![Alt text](/images/img00008.png?raw=true "Title")
+
