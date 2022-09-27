@@ -14,17 +14,16 @@
 
 class KNN {
     int k;
-    std::vector<number_hog> model;
-    std::list<digit_dist> lst;
+    std::vector<number_hog>* model;
     std::vector<Answer> results = std::vector<Answer>(10);
     
     long double distance(const number_hog&, const number_hog&);
-    void list_insert(const digit_dist&);
-    short int best_guess();
+    void list_insert(std::list<digit_dist>&, const digit_dist&);
+    short int best_guess(std::list<digit_dist>&);
     
 public:
     std::vector<Answer> getResults(){ return results; }
-    void setModel(const std::vector<number_hog>& val){ model = val; }
+    void setModel(std::vector<number_hog>* val){ model = val; }
     void setK(const int& val){ k = val;}
     
     bool classify(const number_hog&);
