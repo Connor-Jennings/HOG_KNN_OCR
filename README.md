@@ -9,4 +9,4 @@ Current version has been found to be 96% correct when identifying handwritten di
 
 Examples of digits classified wrong:
 
-![Alt text](/images/iimg00004.png?raw=true "Title")
+![Alt text](/images/img00004.png?raw=true "Title")
