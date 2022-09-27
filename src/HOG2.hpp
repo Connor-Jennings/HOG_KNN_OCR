@@ -41,7 +41,7 @@ class HOG{
     HOG();
     
 public:
-    HOG(const Mat& img) : image(img){ calculateHog(); }
+    HOG(const Mat img) : image(img){ calculateHog(); }
     
     std::vector<double> getHOG(){ return return_HOG; }
     //void setImage(const Mat& value){ image = value; }

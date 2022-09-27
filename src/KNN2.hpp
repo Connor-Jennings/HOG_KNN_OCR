@@ -11,7 +11,6 @@
 #include <string>
 #include <list>
 #include "useful_methods.hpp"
-#include "HOG.hpp"
 
 class KNN {
     int k;
@@ -25,10 +24,10 @@ class KNN {
     
 public:
     std::vector<Answer> getResults(){ return results; }
-    void setModel(const std::vector<number_hog>& val){ model = val;    }
+    void setModel(const std::vector<number_hog>& val){ model = val; }
     void setK(const int& val){ k = val;}
     
-    void classify(const number_hog&);
+    bool classify(const number_hog&);
 };
 
 #endif /* KNN2_hpp */

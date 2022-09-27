@@ -50,7 +50,7 @@ public:
     int getTotal(){return total;}
 };
 
-void output(const std::vector<Answer>&);
+void output(const list_of_params&, const std::vector<Answer>&);
 
 struct digit_dist{
     short int digit;
@@ -58,6 +58,7 @@ struct digit_dist{
 };
 
 Mat getImg(const short int&, const int&, bool);
+Mat getImg(std::string);
 
 void print_list(const std::list<digit_dist>&);
 

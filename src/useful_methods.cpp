@@ -9,15 +9,21 @@
 
 
 
-std::string fileName(const short int& number_selected, const int& file_number, bool test){
+std::string fileName(const short int& number_selected, const int& file_number, bool weAreTesting){
     std::string parentfolder;
-    if(!test){
-        parentfolder = "/Users/connorjennings/Code/KNNproject/data/mnist_png/mnist_png/training";
-    }else{
+    if(weAreTesting){
         parentfolder = "/Users/connorjennings/Code/KNNproject/data/mnist_png/mnist_png/testing";
+    }else{
+        parentfolder = "/Users/connorjennings/Code/KNNproject/data/mnist_png/mnist_png/training";
     }
     std::string subfile = parentfolder + "/" + std::to_string(number_selected) + "/img" ;
-    if(number_selected > 9 || file_number > 4602){
+    if(number_selected > 9){
+        return "-1";
+    }
+    if(file_number > 4602){
+        return "-1";
+    }
+    if(file_number > 500 && weAreTesting){
         return "-1";
     }
     if(file_number < 9){
@@ -36,8 +42,9 @@ std::string fileName(const short int& number_selected, const int& file_number, b
 }
 
 
-void output(const std::vector<Answer>& results){
+void output(const list_of_params& params, const std::vector<Answer>& results){
     std::cout << " ---------\n| Results |\n ---------" << std::endl;
+    std::cout << "( k: "<< params.k <<  ", Reps: " << params.reps << " )"<< std::endl;
     int correct = 0;
     int total = 0;
     for(auto x : results){
@@ -54,8 +61,9 @@ void output(const std::vector<Answer>& results){
 }
 
 Mat getImg(const short int& number_selected, const int& file_number, bool test){
-    auto file = fileName(number_selected, file_number, test);
+    std::string file = fileName(number_selected, file_number, test);
     if(file == "-1"){
+        std::cout << "empyt mat" <<std::endl;
         Mat emptyMat;
         return emptyMat;
     }
@@ -63,12 +71,7 @@ Mat getImg(const short int& number_selected, const int& file_number, bool test){
     Mat img;
     
     img = imread(file, 0); //read in grayscale
-    /*for(int i =0; i < img.cols; ++i){
-        for(int j = 0; j < img.rows; ++j){
-            std::cout << (int)img.at<uchar>(i,j) << " ";
-        }
-        std::cout << std::endl;
-    }*/
+ 
     if(img.empty()){
         std::cout << "Could not read the image "  << std::endl;
         Mat emptyMat;
@@ -76,6 +79,24 @@ Mat getImg(const short int& number_selected, const int& file_number, bool test){
     }
     return img;
 }
+
+Mat getImg(std::string fileName){
+    if(fileName == "-1"){
+        std::cout << "empyt mat" <<std::endl;
+        Mat emptyMat;
+        return emptyMat;
+    }
+    // get image and resize
+    Mat img = imread(fileName, 0); //read in grayscale
+   
+    if(img.empty()){
+        std::cout << "Could not read the image "  << std::endl;
+        Mat emptyMat;
+        return emptyMat;
+    }
+    return img;
+}
+
 
 void print_list(const std::list<digit_dist>& lst){
     for (auto it = lst.begin(); it != lst.end(); ++it){

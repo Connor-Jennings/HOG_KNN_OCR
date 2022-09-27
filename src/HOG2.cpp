@@ -17,10 +17,13 @@ void HOG::calculateHog(){
 };
 
 void HOG::fourByFour(){
+    //for each block of 4x4 pixels
     for(int startRow = 0; startRow < image.rows; startRow+=4){
         for(int startCol = 0; startCol < image.cols; startCol+=4 ){
+            
+            //create a new histogram on that 4x4 block
+            std::vector<double> temp_hist(9,0);
             for(int row = 0; row < 4; ++row){
-                std::vector<double> temp_hist(9,0);
                 for(int col = 0; col < 4; ++col){
                     int gx = xGradientAt(row + startRow, col + startCol);
                     int gy = yGradientAt(row + startRow, col + startCol);
@@ -29,8 +32,9 @@ void HOG::fourByFour(){
                     int index = floor(angle(gx,gy)/20);
                     temp_hist[index] += magna((int)gx,(int)gy);
                 }
-                base_histograms.push_back(temp_hist);
             }
+            //add that histogram to the list of histograms until we have covered the whole image
+            base_histograms.push_back(temp_hist);
         }
     }
 }
@@ -77,8 +81,7 @@ void HOG::normalize3x3CellManager(){
         if(count % 4 == 0 && count != 0){
             ++slot1; ++slot2; ++slot3; ++slot4; ++slot5; ++slot6; ++slot7; ++slot8; ++slot9;
         }
-        normalize3x3Cells(
-                          base_histograms[slot1],
+        normalize3x3Cells(base_histograms[slot1],
                           base_histograms[slot2],
                           base_histograms[slot3],
                           base_histograms[slot4],
@@ -91,7 +94,15 @@ void HOG::normalize3x3CellManager(){
     }
 }
 
-void HOG::normalize3x3Cells(const std::vector<double>& v1, const std::vector<double>& v2, const std::vector<double>& v3, const std::vector<double>& v4, const std::vector<double>& v5, const std::vector<double>& v6, const std::vector<double>& v7, const std::vector<double>& v8, const std::vector<double>& v9){
+void HOG::normalize3x3Cells(const std::vector<double>& v1,
+                            const std::vector<double>& v2,
+                            const std::vector<double>& v3,
+                            const std::vector<double>& v4,
+                            const std::vector<double>& v5,
+                            const std::vector<double>& v6,
+                            const std::vector<double>& v7,
+                            const std::vector<double>& v8,
+                            const std::vector<double>& v9){
     std::vector<double> temp;
     for(auto x : v1) temp.push_back(x);
     for(auto x : v2) temp.push_back(x);
@@ -102,8 +113,9 @@ void HOG::normalize3x3Cells(const std::vector<double>& v1, const std::vector<dou
     for(auto x : v7) temp.push_back(x);
     for(auto x : v8) temp.push_back(x);
     for(auto x : v9) temp.push_back(x);
-    std::vector<double> temp2 = normalizeFeatureList(temp);
-    for(auto x : temp2) return_HOG.push_back(x);
+    std::vector<double> normal_temp = normalizeFeatureList(temp);
+    //return_HOG = normal_temp;
+    for(auto x : normal_temp) return_HOG.push_back(x);
 }
 
 std::vector<double> HOG::normalizeFeatureList(std::vector<double> temp){

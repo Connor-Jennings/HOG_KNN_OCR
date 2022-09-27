@@ -50,10 +50,10 @@ short int KNN::best_guess(){
     int count = 1;
     std::vector<int> tally(10);
     for(std::list<digit_dist>::iterator it = lst.begin(); it != lst.end() && count <= k; ++it, ++count){
-        std::cout << it->digit << " " << it->dist << " ||\n";
+        //std::cout << it->digit << " " << it->dist << " ||\n";
         tally[it->digit] += 1;
     }
-    std::cout << std::endl;
+    //std::cout << std::endl;
     
     int winner = 0;
     int winner_tally = 0;
@@ -67,7 +67,7 @@ short int KNN::best_guess(){
     return winner;
 }
 
-void KNN::classify(const number_hog& test_obj){
+bool KNN::classify(const number_hog& test_obj){
     if(!lst.empty()){ lst.clear(); }
     for(auto known_value : model){
         long double dist = distance(test_obj, known_value);
@@ -76,8 +76,11 @@ void KNN::classify(const number_hog& test_obj){
     }
     if(best_guess() == test_obj.digit){
         results[test_obj.digit].right();
+        return true;
     } else{
         results[test_obj.digit].wrong();
+        std::cout << "guessed: "<< best_guess() << ", correct answer: " << test_obj.digit << std::endl;
+        return false;
     }
     //reset list for next use;
     lst.clear();
