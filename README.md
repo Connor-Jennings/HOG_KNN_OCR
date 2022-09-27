@@ -5,4 +5,4 @@ This program employes the Histogram of Oriented Gradients for feature detection 
 
 The data used for training and testing is from the MNIST dataset. Which can be found at http://yann.lecun.com/exdb/mnist/. 
 
-Current version works at a 96% correct when identifying handwritten digits. These results were obtained with k set to 3, and 2,000 HOGs per digit for the KNN algorithm to reference for classification. 
+Current version has been tested to be 96% correct when identifying handwritten digits. These results were obtained with k set to 3, and 2,000 HOGs per digit for the KNN algorithm to reference for classification. 
